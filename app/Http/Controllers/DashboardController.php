@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Show dashboard based on user role
-     */
+  
     public function index()
     {
         $user = auth()->user();

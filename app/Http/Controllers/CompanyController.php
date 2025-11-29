@@ -11,18 +11,14 @@ use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display all companies (SuperAdmin only)
-     */
+   
     public function index()
     {
         $companies = Company::withCount(['users', 'shortUrls'])->latest()->get();
         return view('companies.index', compact('companies'));
     }
 
-    /**
-     * Store a new company and send invitation to founder
-     */
+   
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +31,6 @@ class CompanyController extends Controller
             'name' => $request->name,
         ]);
 
-        // Create and send invitation to founder
         $token = Str::random(32);
 
         $invitation = Invitation::create([
@@ -46,18 +41,7 @@ class CompanyController extends Controller
             'invited_by' => auth()->id(),
         ]);
 
-        // Send invitation email
-        // try {
-        //     Mail::to($request->founder_email)->send(new InvitationMail($invitation));
-        //     // dd("AA");
-            
-        //     return redirect()->route('companies.index')->with('success', 'Company created and invitation sent to founder successfully!');
-        // } catch (\Exception $e) {
-
-        //     // If email fails, still create company but show warning
-        //     return redirect()->route('companies.index')->with('warning', 'Company created but failed to send invitation email. Please try sending invitation manually.');
-        // }
-
+       
         // Send invitation email with detailed error handling
         try {
             
@@ -73,9 +57,7 @@ class CompanyController extends Controller
         }
     }
 
-    /**
-     * Show company details
-     */
+   
     public function show(Company $company)
     {
         $company->load(['users', 'shortUrls.user']);

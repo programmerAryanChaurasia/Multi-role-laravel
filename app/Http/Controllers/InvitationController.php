@@ -10,9 +10,7 @@ use Illuminate\Support\Str;
 
 class InvitationController extends Controller
 {
-    /**
-     * Send invitation (SuperAdmin - for any company)
-     */
+  
     public function store(Request $request)
     {
         $request->validate([
@@ -47,9 +45,7 @@ class InvitationController extends Controller
         return back()->with('success', 'Invitation sent successfully!');
     }
 
-    /**
-     * Send invitation within admin's company
-     */
+  
     public function storeCompany(Request $request)
     {
         $request->validate([
@@ -95,9 +91,7 @@ class InvitationController extends Controller
         return back()->with('success', 'Invitation sent successfully!');
     }
 
-    /**
-     * Show pending invitations
-     */
+  
     public function index()
     {
         $invitations = Invitation::with(['company', 'inviter'])
@@ -108,9 +102,6 @@ class InvitationController extends Controller
         return view('invitations.index', compact('invitations'));
     }
 
-    /**
-     * Cancel invitation
-     */
     public function destroy(Invitation $invitation)
     {
         // Check if user has permission to delete this invitation
@@ -123,9 +114,7 @@ class InvitationController extends Controller
         return back()->with('success', 'Invitation cancelled successfully.');
     }
 
-    /**
- * Resend invitation for company founder
- */
+ 
     public function resend(Request $request)
     {
         $request->validate([

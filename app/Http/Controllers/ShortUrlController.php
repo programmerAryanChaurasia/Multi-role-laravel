@@ -8,9 +8,7 @@ use Illuminate\Support\Str;
 
 class ShortUrlController extends Controller
 {
-    /**
-     * Display short URLs based on user role
-     */
+  
     public function index()
     {
         $user = auth()->user();
@@ -26,9 +24,6 @@ class ShortUrlController extends Controller
         return view('short-urls.index', compact('shortUrls'));
     }
 
-    /**
-     * Store a new short URL
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -52,9 +47,7 @@ class ShortUrlController extends Controller
         ]);
     }
 
-    /**
-     * Redirect short URL to original URL
-     */
+  
     public function redirect($shortCode)
     {
         $shortUrl = ShortUrl::where('short_code', $shortCode)->firstOrFail();
@@ -65,9 +58,7 @@ class ShortUrlController extends Controller
         return redirect($shortUrl->original_url);
     }
 
-    /**
-     * Delete short URL
-     */
+    
     public function destroy(ShortUrl $shortUrl)
     {
         // Check authorization
@@ -84,9 +75,7 @@ class ShortUrlController extends Controller
         return back()->with('success', 'Short URL deleted successfully.');
     }
 
-    /**
-     * Generate unique short code
-     */
+  
     private function generateUniqueShortCode($length = 6)
     {
         do {

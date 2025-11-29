@@ -8,17 +8,13 @@ use Illuminate\Validation\Rules;
 
 class ProfileController extends Controller
 {
-    /**
-     * Show profile edit form
-     */
+   
     public function edit()
     {
         return view('profile.edit');
     }
 
-    /**
-     * Update profile information
-     */
+   
     public function update(Request $request)
     {
         $user = auth()->user();
@@ -36,9 +32,7 @@ class ProfileController extends Controller
         return back()->with('success', 'Profile updated successfully!');
     }
 
-    /**
-     * Update password
-     */
+   
     public function updatePassword(Request $request)
     {
         $request->validate([

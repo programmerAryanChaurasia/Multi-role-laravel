@@ -1,11 +1,6 @@
-<!-- Add this to your layouts/master.blade.php file or create a separate footer partial -->
-
-<!-- Footer Section -->
 <footer class="bg-dark text-light pt-5">
     <div class="container">
-        <!-- Main Footer Content -->
         <div class="row g-4">
-            <!-- Company Info -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="footer-brand mb-4">
                     <div class="d-flex align-items-center">

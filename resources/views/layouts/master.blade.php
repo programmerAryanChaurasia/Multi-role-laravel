@@ -55,21 +55,16 @@
     </style>
 </head>
 <body>
-    <!-- Include Navigation -->
     @include('layouts.navigation')
     
-    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
     
-    <!-- Include Footer -->
     @include('layouts.footer')
     
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Custom JS -->
     <script>
         // Auto-dismiss alerts
         setTimeout(function() {

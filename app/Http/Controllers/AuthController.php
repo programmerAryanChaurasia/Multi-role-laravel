@@ -12,17 +12,12 @@ use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
-    /**
-     * Show login form
-     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle login request
-     */
+   
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -40,9 +35,7 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Show registration form
-     */
+    
     public function showRegistrationForm($token = null)
     {
         if ($token) {
@@ -54,9 +47,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    /**
-     * Handle registration request
-     */
+    
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -81,9 +72,7 @@ class AuthController extends Controller
         return redirect('/dashboard')->with('success', 'Account created successfully! Welcome to Sembark.');
     }
 
-    /**
-     * Handle invitation registration
-     */
+  
     public function registerWithInvitation(Request $request, $token)
     {
         $invitation = Invitation::where('token', $token)->firstOrFail();
@@ -115,9 +104,7 @@ class AuthController extends Controller
         return redirect('/dashboard')->with('success', 'Welcome to Sembark! Your account has been created successfully.');
     }
 
-    /**
-     * Handle logout
-     */
+   
     public function logout(Request $request)
     {
         Auth::logout();

@@ -20,21 +20,6 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-
 
 
 // Public Routes
@@ -49,35 +34,27 @@ Route::post('/login', [AuthController::class, 'login']);
 // Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Invitation Registration
 Route::get('/register/{token}', [AuthController::class, 'showRegistrationForm'])->name('register.with.token');
 Route::post('/register/{token}', [AuthController::class, 'registerWithInvitation']);
 
 
-// Authenticated Routes
 Route::middleware(['auth'])->group(function () {
-    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
-    // Short URLs
     Route::get('/short-urls', [ShortUrlController::class, 'index'])->name('short-urls.index');
     Route::post('/short-urls', [ShortUrlController::class, 'store'])->name('short-urls.store');
     Route::delete('/short-urls/{shortUrl}', [ShortUrlController::class, 'destroy'])->name('short-urls.destroy');
 });
 
-// SuperAdmin Routes
 Route::middleware(['auth', 'superadmin'])->group(function () {
-    // Companies
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
     Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
     Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
     
-    // Invitations
     Route::post('/invitations', [InvitationController::class, 'store'])->name('invitations.store');
     Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index');
     Route::delete('/invitations/{invitation}', [InvitationController::class, 'destroy'])->name('invitations.destroy');
@@ -93,7 +70,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 // Public Short URL Redirect
-Route::get('/{shortCode}', [ShortUrlController::class, 'redirect'])->name('short-url.redirect');
+// Route::get('/{shortCode}', [ShortUrlController::class, 'redirect'])->name('short-url.redirect');
 
 
 
